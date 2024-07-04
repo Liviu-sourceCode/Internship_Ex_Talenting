@@ -1,0 +1,7 @@
+C:\Users\liviu\OneDrive\Desktop\Rezolvari task-uri\Task4\bin\Debug\Task4.exe.config
+C:\Users\liviu\OneDrive\Desktop\Rezolvari task-uri\Task4\bin\Debug\Task4.exe
+C:\Users\liviu\OneDrive\Desktop\Rezolvari task-uri\Task4\bin\Debug\Task4.pdb
+C:\Users\liviu\OneDrive\Desktop\Rezolvari task-uri\Task4\obj\Debug\Task4.csproj.AssemblyReference.cache
+C:\Users\liviu\OneDrive\Desktop\Rezolvari task-uri\Task4\obj\Debug\Task4.csproj.CoreCompileInputs.cache
+C:\Users\liviu\OneDrive\Desktop\Rezolvari task-uri\Task4\obj\Debug\Task4.exe
+C:\Users\liviu\OneDrive\Desktop\Rezolvari task-uri\Task4\obj\Debug\Task4.pdb
