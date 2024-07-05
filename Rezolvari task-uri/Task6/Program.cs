@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,59 +11,56 @@ namespace Task6
     {
         static void Main(string[] args)
         {
-
+           
             List<string> listaNume = new List<string> {"Horia" , "Alonso", "Olof", "Alina", "Matei", "Iza", "Ion"};
 
-                 ListaNume(listaNume);
+                 Lista.listaNume(listaNume, 'a');
                  Console.WriteLine("");
 
-                 cinciLitere(listaNume);
+                 Lista.cinciLitere(listaNume);
                  Console.WriteLine("");
 
-                 numeLung(listaNume);
+                 Lista.numeLung(listaNume);
                  Console.WriteLine("");
 
-                 numeScurt(listaNume);
+                 Lista.numeScurt(listaNume);
                  Console.WriteLine("");
 
-                 aparitieNume(listaNume);
-
+                 Lista.aparitieNume(listaNume);
+                 Console.WriteLine("");
         }
+    }
 
-        public static void ListaNume(List<string> lista)
+    public class Lista
+    {
+        //Afiseaza alfabetic toate numele care contin litera 'a'
+        public static void listaNume(List<string> lista, char caracter)
         {
-            
-            string caracter = "a";
 
-            List<string> listaFiltrata = new List<string>();
-
-            
-            caracter = caracter.ToLower();
-
-            
-            foreach (string element in lista)
+            for(int i = 0; i < lista.Count; i++)
             {
-                if (element.ToLower().Contains(caracter))
+                if (!lista[i].ToLower().Contains(caracter))
                 {
-                    listaFiltrata.Add(element);
+                    lista.RemoveAt(i);
                 }
             }
-           
-            listaFiltrata.Sort();
+
+            lista.Sort();
 
             Console.WriteLine("Elementele filtrate si sortate care contin litera 'a':");
 
-            foreach (string elem in listaFiltrata)
+            foreach (string elem in lista)
             {
                 Console.WriteLine(elem);
             }
 
         }
 
+        //Afiseaza numele >= 5 litere
         public static void cinciLitere(List<string> listaNume)
         {
             Console.WriteLine("Numele mai mari sau egale cu 5 litere sunt:");
-            for(int i = 0; i < listaNume.Count; i++)
+            for (int i = 0; i < listaNume.Count; i++)
             {
                 if (listaNume[i].Length >= 5)
                 {
@@ -72,6 +69,7 @@ namespace Task6
             }
         }
 
+        //Afiseaza cele mai lungi nume
         public static void numeLung(List<string> lista)
         {
             if (lista == null || lista.Count == 0)
@@ -79,30 +77,27 @@ namespace Task6
                 throw new ArgumentException("Lista nu poate fi null sau goala.");
             }
 
-            // gaseste lungimea maxima a unui string
             int maxLength = lista.Max(s => s.Length);
-
-            // Filtreaza si adauga in 'result' stringurile cu lungimea maxima
+            
             List<string> result = lista.Where(s => s.Length == maxLength).ToList();
 
             Console.WriteLine("Stringurile cu lungimea maxima:");
             foreach (string str in result)
             {
                 Console.WriteLine(str);
-            }            
+            }
         }
 
+        //Afiseaza cele mai scurte nume
         public static void numeScurt(List<string> lista)
         {
             if (lista == null || lista.Count == 0)
             {
                 throw new ArgumentException("Lista nu poate fi null sau goala.");
             }
-
-            // Gaseste lungimea celui mai mic string din lista
+           
             int minLength = lista.Min(s => s.Length);
-
-            // imi filtreaza si adauga in 'result' stringurile cu lungimea minima
+            
             List<string> result = lista.Where(s => s.Length == minLength).ToList();
 
             Console.WriteLine("Stringurile cu lungimea minima:");
@@ -112,11 +107,12 @@ namespace Task6
             }
         }
 
+        //Afiseaza de cate ori apare numele 'Alina'
         public static void aparitieNume(List<string> listaNume)
         {
             string nume = "Alina";
             int count = 0;
-            for(int i = 0; i < listaNume.Count; i++)
+            for (int i = 0; i < listaNume.Count; i++)
             {
                 if (listaNume[i] == nume)
                 {
