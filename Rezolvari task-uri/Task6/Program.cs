@@ -11,104 +11,99 @@ namespace Task6
     {
         static void Main(string[] args)
         {
-           
-            List<string> listaNume = new List<string> {"Horia" , "Alonso", "Olof", "Alina", "Matei", "Iza", "Ion"};
 
-                 Lista.listaNume(listaNume, 'a');
-                 Console.WriteLine("");
+            List<string> listaNume = new List<string> {"Ion", "Alina", "Andrei"};
 
-                 Lista.cinciLitere(listaNume);
-                 Console.WriteLine("");
+            TratareExceptiiSiAfisare.ProceseazaListaSiAfiseaza(listaNume);
 
-                 Lista.numeLung(listaNume);
-                 Console.WriteLine("");
-
-                 Lista.numeScurt(listaNume);
-                 Console.WriteLine("");
-
-                 Lista.aparitieNume(listaNume);
-                 Console.WriteLine("");
         }
     }
-
+    //Clasa care trateaza sarcinile
     public class Lista
     {
         //Afiseaza alfabetic toate numele care contin litera 'a'
-        public static void listaNume(List<string> lista, char caracter)
+        public static void SortareNume(List<string> lista, char caracter)
         {
+            var result = lista.Where(s => s.ToLower().Contains(caracter)).OrderBy(s => s).ToList();
 
-            for(int i = 0; i < lista.Count; i++)
+            if (result.Count == 0)
             {
-                if (!lista[i].ToLower().Contains(caracter))
+                Console.WriteLine($"Nu există cuvinte cu litera '{caracter}'!");
+            }
+            else
+            {
+                Console.WriteLine($"Elementele filtrate și sortate care conțin litera '{caracter}':");
+                foreach (string elem in result)
                 {
-                    lista.RemoveAt(i);
+                    Console.WriteLine(elem);
                 }
+
             }
-
-            lista.Sort();
-
-            Console.WriteLine("Elementele filtrate si sortate care contin litera 'a':");
-
-            foreach (string elem in lista)
-            {
-                Console.WriteLine(elem);
-            }
-
         }
-
         //Afiseaza numele >= 5 litere
-        public static void cinciLitere(List<string> listaNume)
+        public static void CinciLitere(List<string> listaNume)
         {
             Console.WriteLine("Numele mai mari sau egale cu 5 litere sunt:");
+
+            int count = 0;
             for (int i = 0; i < listaNume.Count; i++)
             {
                 if (listaNume[i].Length >= 5)
                 {
+                    count++;
                     Console.WriteLine(listaNume[i]);
                 }
             }
+            if (count == 0) 
+            {
+                Console.WriteLine("Nu exista cuvinte de cel putin 5 litere!");
+            }
         }
-
         //Afiseaza cele mai lungi nume
-        public static void numeLung(List<string> lista)
+        public static void NumeLung(List<string> lista)
         {
-            if (lista == null || lista.Count == 0)
+            if(lista.Count == 1)
             {
-                throw new ArgumentException("Lista nu poate fi null sau goala.");
+                Console.WriteLine($"Stringul cu cel mai lung nume: {lista[0]}");
             }
-
-            int maxLength = lista.Max(s => s.Length);
-            
-            List<string> result = lista.Where(s => s.Length == maxLength).ToList();
-
-            Console.WriteLine("Stringurile cu lungimea maxima:");
-            foreach (string str in result)
+            else
             {
-                Console.WriteLine(str);
-            }
-        }
+                int maxLength = lista.Max(s => s.Length);
 
-        //Afiseaza cele mai scurte nume
-        public static void numeScurt(List<string> lista)
-        {
-            if (lista == null || lista.Count == 0)
-            {
-                throw new ArgumentException("Lista nu poate fi null sau goala.");
+                List<string> result = lista.Where(s => s.Length == maxLength).ToList();
+
+                Console.WriteLine("Stringurile cu lungimea maxima:");
+                foreach (string str in result)
+                {
+                    Console.WriteLine(str);
+                }
             }
            
-            int minLength = lista.Min(s => s.Length);
-            
-            List<string> result = lista.Where(s => s.Length == minLength).ToList();
-
-            Console.WriteLine("Stringurile cu lungimea minima:");
-            foreach (string str in result)
-            {
-                Console.WriteLine(str);
-            }
         }
+        //Afiseaza cele mai scurte nume
+        public static void NumeScurt(List<string> lista)
+        {
 
+            if(lista.Count == 1)
+            {
+                Console.WriteLine($"Stringurile cu lungimea minima: {lista[0]}");
+            }
+            else 
+            {
+                int minLength = lista.Min(s => s.Length);
+
+                List<string> result = lista.Where(s => s.Length == minLength).ToList();
+
+                Console.WriteLine("Stringurile cu lungimea minima:");
+                foreach (string str in result)
+                {
+                    Console.WriteLine(str);
+                }
+            }
+            
+        }
         //Afiseaza de cate ori apare numele 'Alina'
-        public static void aparitieNume(List<string> listaNume)
+         public static void AparitieNume(List<string> listaNume)
         {
             string nume = "Alina";
             int count = 0;
@@ -121,6 +116,27 @@ namespace Task6
             }
             Console.WriteLine($"Numarul de aparitii al cuvantului 'Alina':{count}");
         }
+    }    
+    //Clasa care trateaza exceptiile si apeleaza metodele
+    public class TratareExceptiiSiAfisare : Lista
+    {
+        public static void ProceseazaListaSiAfiseaza(List<string> lista)
+        {
 
-    }
+            if (lista == null || lista.Count == 0 || lista.Any(s => string.IsNullOrEmpty(s) || !s.All(char.IsLetter)))
+            {
+                throw new ArgumentException("Lista contine cel putin un string invalid!");
+            }
+                SortareNume(lista, 'a');
+                Console.WriteLine();
+                CinciLitere(lista);
+                Console.WriteLine();
+                NumeLung(lista);
+                Console.WriteLine();
+                NumeScurt(lista);
+                Console.WriteLine();
+                AparitieNume(lista);
+                Console.WriteLine();           
+        }       
+        }    
 }
