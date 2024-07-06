@@ -32,7 +32,7 @@ namespace Task6
             }
             else
             {
-                Console.WriteLine($"Elementele filtrate și sortate care conțin litera '{caracter}':");
+                Console.WriteLine($"Elementele filtrate si sortate care contin litera '{caracter}':");
                 foreach (string elem in result)
                 {
                     Console.WriteLine(elem);
